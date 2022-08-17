@@ -47,10 +47,13 @@ class CarLearn:
 
     def course(self):
         course_href  = self.driver.find_element("css selector",
-                                                 "a[class='no-decoration mr10']")
+                                                 "a[href='/student/modules']")
         course_href.click()
         time.sleep(10)
-
+        course1_href = self.driver.find_element("css selector",
+                                               "a[href='/student/courses/1/ref/951fcf75-5f3e-4ae5-b3ea-9c5de6365f5c']")
+        course1_href.click()
+        time.sleep(10)
 
     def get_progressbar(self):
         iframe = self.driver.find_element("tag name",
@@ -100,7 +103,7 @@ class CarLearn:
             try:
                 print("no next button")
                 continue_but = self.driver.find_element("css selector",
-                                             "button[class='universal-control-panel__button universal-control-panel__button_next universal-control-panel__button_right-arrow']")
+                                             "button[class='universal-control-panel__button universal-control-panel__button_right-arrow universal-control-panel__button_show-arrow universal-control-panel__button_active']")
                 continue_but.click()
             except:
                 print("Error occur. pls Diy!!!")
