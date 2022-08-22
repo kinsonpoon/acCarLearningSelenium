@@ -26,17 +26,17 @@ class CarLearn:
         login_but.click()
         time.sleep(5)
         input_2step = self.driver.find_element("id", "mat-input-2")
-        input_2step.send_keys("hong kong")
+        input_2step.send_keys("") #valid question
         # answer_but = self.driver.find_element("css selector",
         #                                      "button[class='mat-raised-button mat-button-base mat-primary']")
         # self.action.move_to_element(answer_but).click(answer_but).perform()
         # hand click
         print("click answer button in 30 seconds")
         time.sleep(30)
-        start_course_but = self.driver.find_element("css selector",
-                                             "button[class='mat-raised-button mat-button-base mat-primary']")
-        start_course_but.click()
-        time.sleep(5)
+        # start_course_but = self.driver.find_element("css selector",
+        #                                      "button[class='mat-raised-button mat-button-base mat-primary']")
+        # start_course_but.click()
+        # time.sleep(5)
 
 
     def syllabus(self):
@@ -45,15 +45,24 @@ class CarLearn:
         syllabus_herf.click()
         time.sleep(10)
 
-    def course(self):
-        course_href  = self.driver.find_element("css selector",
-                                                 "a[href='/student/modules']")
-        course_href.click()
-        time.sleep(10)
-        course1_href = self.driver.find_element("css selector",
-                                               "a[href='/student/courses/1/ref/951fcf75-5f3e-4ae5-b3ea-9c5de6365f5c']")
-        course1_href.click()
-        time.sleep(10)
+    def course(self, module):
+        # course_href  = self.driver.find_element("css selector",
+        #                                          "a[href='/student/modules']")
+        # course_href.click()
+        # time.sleep(10)
+        # course1_href = self.driver.find_element("css selector",
+        #                                        "a[href='/student/courses/3/ref/951fcf75-5f3e-4ae5-b3ea-9c5de6365f5c']")
+        # course1_href.click()
+        # time.sleep(10)
+        time.sleep(5)
+        # hand click
+        print("click answer button in 30 seconds")
+        time.sleep(30)
+        input_2step = self.driver.find_element("id", "mat-input-2")
+        input_2step.send_keys("")  # valid question
+        self.driver.get('https://ac.carslearning.ca/student/courses/'+module+'/ref/951fcf75-5f3e-4ae5-b3ea-9c5de6365f5c') #change num
+        print("click answer button in 30 seconds")
+        time.sleep(30)
 
     def get_progressbar(self):
         iframe = self.driver.find_element("tag name",
@@ -66,19 +75,22 @@ class CarLearn:
         all = int(progress_array[1])
         current = int(progress_array[0])
         print("total:" + progress_array[1])
-        while current != all:
-            self.wait_and_click(current)
+        while current != all-1:
+            try:
+                self.wait_and_click(current)
             # iframe = self.driver.find_element("tag name",
             #                                   "iframe")
             # self.driver.switch_to.frame(iframe)
-            progress_bar = self.driver.find_element("css selector",
+                progress_bar = self.driver.find_element("css selector",
                                                     "div[class='progressbar__label']")
-            progress = progress_bar.text
-            progress_array = progress.split("/")
-            all = int(progress_array[1])
-            current = int(progress_array[0])
-            print("total:" + progress_array[1])
-
+                progress = progress_bar.text
+                progress_array = progress.split("/")
+                all = int(progress_array[1])
+                current = int(progress_array[0])
+                print("total:" + progress_array[1])
+            except:
+                print("Error occur. pls Diy!!!")
+                val = input("enter after input")
 
 
 
@@ -114,11 +126,11 @@ class CarLearn:
 
 
 if __name__ == "__main__":
+    val = input("module")
     carlearn = CarLearn()
     carlearn.login()
-    carlearn.syllabus()
+    # carlearn.syllabus()
+    carlearn.course()
     carlearn.get_progressbar()
-    # mdLand.get_searchbar()
-    # # mdLand.try_select_for_patient()
-    # mdLand.get_search_result()
-    # mdLand.display_patient_list()
+
+
