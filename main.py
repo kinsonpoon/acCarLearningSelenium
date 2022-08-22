@@ -5,6 +5,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 from selenium.webdriver import ActionChains
 
+
+# todo fill all this
+token = ""
+username = ""
+pw = ""
+answer = ""
+
 class CarLearn:
     def __init__(self):
         self.driver = webdriver.Firefox()
@@ -20,13 +27,13 @@ class CarLearn:
         time.sleep(5)
         input_id = self.driver.find_element("id", "mat-input-0")
         input_password = self.driver.find_element("id", "mat-input-1")
-        input_id.send_keys("") #username
-        input_password.send_keys("") #pw
+        input_id.send_keys(username) #username
+        input_password.send_keys(pw) #pw
         login_but = self.driver.find_element("css selector","button[class='mat-raised-button mat-button-base mat-primary']")
         login_but.click()
         time.sleep(5)
         input_2step = self.driver.find_element("id", "mat-input-2")
-        input_2step.send_keys("") #valid question
+        input_2step.send_keys(answer) #valid question
         # answer_but = self.driver.find_element("css selector",
         #                                      "button[class='mat-raised-button mat-button-base mat-primary']")
         # self.action.move_to_element(answer_but).click(answer_but).perform()
@@ -59,8 +66,8 @@ class CarLearn:
         print("click answer button in 30 seconds")
         time.sleep(30)
         input_2step = self.driver.find_element("id", "mat-input-2")
-        input_2step.send_keys("")  # valid question
-        self.driver.get('https://ac.carslearning.ca/student/courses/'+module+'/ref/951fcf75-5f3e-4ae5-b3ea-9c5de6365f5c') #change num
+        input_2step.send_keys(answer)  # valid question
+        self.driver.get('https://ac.carslearning.ca/student/courses/'+module+'/ref/'+ token) #change num
         print("click answer button in 30 seconds")
         time.sleep(30)
 
